@@ -1,0 +1,187 @@
+{
+  "started": "2026-10-20 09:33:32",
+  "duration_s": 20.1,
+  "outcome": "Halted: stuck: rover cannot be freed",
+  "people_target": 2,
+  "people_found": 0,
+  "time_limit_min": 0.0,
+  "battery_start_v": 12.2,
+  "battery_end_v": 12.2,
+  "estimated_distance_travelled_m": 3.5,
+  "estimated_distance_from_entry_at_end_m": 2.49,
+  "people": [],
+  "path_out_m": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      -0.011,
+      0.647
+    ],
+    [
+      -0.034,
+      1.949
+    ],
+    [
+      -0.053,
+      2.486
+    ],
+    [
+      -0.046,
+      2.295
+    ],
+    [
+      -0.028,
+      2.503
+    ],
+    [
+      -0.047,
+      2.289
+    ],
+    [
+      0.157,
+      2.286
+    ],
+    [
+      0.114,
+      2.484
+    ]
+  ],
+  "path_return_m": [],
+  "events": [
+    {
+      "t": 0.0,
+      "text": "Mission started: find 2 people, then return to the entry point"
+    },
+    {
+      "t": 0.3,
+      "text": "Exploration mission started"
+    },
+    {
+      "t": 2.9,
+      "text": "Space classified as: ROOM (width 247cm, length 518cm)"
+    },
+    {
+      "t": 2.9,
+      "text": "Door D1 detected at (-0.03m, 1.64m)"
+    },
+    {
+      "t": 2.9,
+      "text": "Door D2 detected via camera at (-0.30m, 3.98m)"
+    },
+    {
+      "t": 2.9,
+      "text": "Navigating toward door D1 at (-0.03m, 1.65m)"
+    },
+    {
+      "t": 4.1,
+      "text": "Verifying doorway opening for door D1"
+    },
+    {
+      "t": 4.5,
+      "text": "Passing through door D1"
+    },
+    {
+      "t": 6.8,
+      "text": "Door D1 passed through and marked visited"
+    },
+    {
+      "t": 9.6,
+      "text": "Space classified as: CORRIDOR (width 207cm, length 604cm)"
+    },
+    {
+      "t": 9.6,
+      "text": "Door D3 detected at (-0.08m, 3.17m)"
+    },
+    {
+      "t": 9.6,
+      "text": "Door D4 detected at (-0.81m, 0.49m)"
+    },
+    {
+      "t": 9.6,
+      "text": "Door D5 detected at (1.12m, 0.87m)"
+    },
+    {
+      "t": 9.6,
+      "text": "Door D6 detected via camera at (-0.13m, 11.94m)"
+    },
+    {
+      "t": 9.6,
+      "text": "Door D7 detected via camera at (1.64m, 11.80m)"
+    },
+    {
+      "t": 9.6,
+      "text": "Corridor step: advancing 100 cm"
+    },
+    {
+      "t": 10.6,
+      "text": "Stall detected: initiating recovery attempt 1 of 3"
+    },
+    {
+      "t": 11.5,
+      "text": "Stall recovery tier 1 complete (backoff & wiggle)"
+    },
+    {
+      "t": 14.2,
+      "text": "Space classified as: CORRIDOR (width 179cm, length 585cm)"
+    },
+    {
+      "t": 14.2,
+      "text": "Door D8 detected at (-1.06m, 2.66m)"
+    },
+    {
+      "t": 14.2,
+      "text": "Corridor step: advancing 100 cm"
+    },
+    {
+      "t": 14.6,
+      "text": "Stall detected: initiating recovery attempt 2 of 3"
+    },
+    {
+      "t": 16.1,
+      "text": "Stall detected: initiating recovery attempt 3 of 3"
+    },
+    {
+      "t": 16.1,
+      "text": "Stall recovery failed after 3 attempts: rover STUCK"
+    },
+    {
+      "t": 16.1,
+      "text": "Stall recovery tier 2 complete (lateral sidestep)"
+    },
+    {
+      "t": 19.0,
+      "text": "Space classified as: ROOM (width 236cm, length 282cm)"
+    },
+    {
+      "t": 19.0,
+      "text": "Door D9 detected via camera at (1.11m, 2.85m)"
+    },
+    {
+      "t": 19.0,
+      "text": "Navigating toward door D3 at (-0.08m, 3.17m)"
+    },
+    {
+      "t": 19.4,
+      "text": "Verifying doorway opening for door D3"
+    },
+    {
+      "t": 19.7,
+      "text": "Passing through door D3"
+    },
+    {
+      "t": 20.1,
+      "text": "Stall detected: initiating recovery attempt 4 of 3"
+    },
+    {
+      "t": 20.1,
+      "text": "Stall recovery failed after 3 attempts: rover STUCK"
+    },
+    {
+      "t": 20.1,
+      "text": "Mission halted: stuck: rover cannot be freed"
+    }
+  ],
+  "note": "Positions are estimates from motor run time (no encoders / IMU) and drift as the rover moves."
+}

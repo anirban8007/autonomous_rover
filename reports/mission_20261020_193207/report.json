@@ -1,0 +1,1152 @@
+{
+  "started": "2026-10-20 19:35:10",
+  "duration_s": 28.8,
+  "outcome": "Returned to the entry point (time limit reached)",
+  "people_target": 5,
+  "people_found": 0,
+  "time_limit_min": 3.0,
+  "battery_start_v": 12.2,
+  "battery_end_v": 12.2,
+  "estimated_distance_travelled_m": 19.4,
+  "estimated_distance_from_entry_at_end_m": 4.64,
+  "people": [],
+  "path_out_m": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      -0.002,
+      0.653
+    ],
+    [
+      -0.005,
+      1.954
+    ],
+    [
+      0.0,
+      2.102
+    ],
+    [
+      0.048,
+      3.408
+    ],
+    [
+      0.124,
+      4.327
+    ],
+    [
+      -0.631,
+      5.388
+    ],
+    [
+      -0.45,
+      5.8
+    ],
+    [
+      -1.597,
+      6.421
+    ],
+    [
+      -2.862,
+      5.821
+    ],
+    [
+      -2.176,
+      4.375
+    ],
+    [
+      -2.044,
+      4.095
+    ]
+  ],
+  "path_return_m": [
+    [
+      -2.044,
+      4.095
+    ],
+    [
+      -2.044,
+      4.095
+    ],
+    [
+      -2.196,
+      4.365
+    ],
+    [
+      -2.143,
+      4.283
+    ],
+    [
+      -2.245,
+      4.441
+    ],
+    [
+      -1.941,
+      5.372
+    ],
+    [
+      -1.761,
+      5.463
+    ],
+    [
+      -1.985,
+      5.35
+    ],
+    [
+      -1.769,
+      5.459
+    ],
+    [
+      -1.229,
+      5.599
+    ],
+    [
+      -1.229,
+      5.599
+    ],
+    [
+      -1.175,
+      5.245
+    ],
+    [
+      0.055,
+      4.376
+    ],
+    [
+      -0.617,
+      5.367
+    ],
+    [
+      -1.146,
+      6.148
+    ],
+    [
+      -0.589,
+      5.35
+    ],
+    [
+      -0.097,
+      4.643
+    ]
+  ],
+  "events": [
+    {
+      "t": 0.0,
+      "text": "Mission started: find 2 people, then return to the entry point"
+    },
+    {
+      "t": 0.3,
+      "text": "Exploration mission started"
+    },
+    {
+      "t": 2.9,
+      "text": "Space classified as: ROOM (width 248cm, length 278cm)"
+    },
+    {
+      "t": 2.9,
+      "text": "Door D1 detected at (-0.00m, 1.64m)"
+    },
+    {
+      "t": 2.9,
+      "text": "Door D2 detected via camera at (1.17m, 9.92m)"
+    },
+    {
+      "t": 2.9,
+      "text": "Navigating toward door D1 at (-0.00m, 1.64m)"
+    },
+    {
+      "t": 4.1,
+      "text": "Verifying doorway opening for door D1"
+    },
+    {
+      "t": 4.5,
+      "text": "Passing through door D1"
+    },
+    {
+      "t": 6.9,
+      "text": "Door D1 passed through and marked visited"
+    },
+    {
+      "t": 9.5,
+      "text": "Space classified as: CORRIDOR (width 209cm, length 580cm)"
+    },
+    {
+      "t": 9.5,
+      "text": "Door D3 detected at (0.04m, 3.09m)"
+    },
+    {
+      "t": 9.5,
+      "text": "Door D4 detected at (-0.90m, 0.52m)"
+    },
+    {
+      "t": 9.5,
+      "text": "Door D5 detected at (1.04m, 0.83m)"
+    },
+    {
+      "t": 9.5,
+      "text": "Door D6 detected via camera at (-0.42m, 5.90m)"
+    },
+    {
+      "t": 9.5,
+      "text": "Navigating toward door D3 at (0.04m, 3.09m)"
+    },
+    {
+      "t": 9.7,
+      "text": "Verifying doorway opening for door D3"
+    },
+    {
+      "t": 10.1,
+      "text": "Passing through door D3"
+    },
+    {
+      "t": 12.5,
+      "text": "Door D3 passed through and marked visited"
+    },
+    {
+      "t": 15.1,
+      "text": "Space classified as: CORRIDOR (width 100cm, length 645cm)"
+    },
+    {
+      "t": 15.1,
+      "text": "Door D7 detected at (0.11m, 4.11m)"
+    },
+    {
+      "t": 15.1,
+      "text": "Door D8 detected at (-0.21m, 4.81m)"
+    },
+    {
+      "t": 15.1,
+      "text": "Door D9 detected at (-0.90m, 2.04m)"
+    },
+    {
+      "t": 15.1,
+      "text": "Door D10 detected at (1.06m, 2.22m)"
+    },
+    {
+      "t": 15.1,
+      "text": "Navigating toward door D7 at (0.11m, 4.11m)"
+    },
+    {
+      "t": 15.1,
+      "text": "Verifying doorway opening for door D7"
+    },
+    {
+      "t": 15.4,
+      "text": "Passing through door D7"
+    },
+    {
+      "t": 17.8,
+      "text": "Door D7 passed through and marked visited"
+    },
+    {
+      "t": 20.4,
+      "text": "Space classified as: CORRIDOR (width 81cm, length 613cm)"
+    },
+    {
+      "t": 20.4,
+      "text": "Navigating toward door D8 at (-0.21m, 4.81m)"
+    },
+    {
+      "t": 20.7,
+      "text": "Verifying doorway opening for door D8"
+    },
+    {
+      "t": 21.1,
+      "text": "Passing through door D8"
+    },
+    {
+      "t": 24.4,
+      "text": "Door D8 passed through and marked visited"
+    },
+    {
+      "t": 27.1,
+      "text": "Space classified as: CORRIDOR (width 79cm, length 733cm)"
+    },
+    {
+      "t": 27.1,
+      "text": "Door D11 detected at (-1.19m, 6.19m)"
+    },
+    {
+      "t": 27.1,
+      "text": "Door D12 detected at (-1.22m, 7.03m)"
+    },
+    {
+      "t": 27.1,
+      "text": "Door D13 detected via camera at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 27.1,
+      "text": "Navigating toward door D6 at (-0.42m, 5.90m)"
+    },
+    {
+      "t": 27.4,
+      "text": "Verifying doorway opening for door D6"
+    },
+    {
+      "t": 27.7,
+      "text": "Passing through door D6"
+    },
+    {
+      "t": 29.1,
+      "text": "Door D6 passed through and marked visited"
+    },
+    {
+      "t": 31.7,
+      "text": "Space classified as: CORRIDOR (width 79cm, length 579cm)"
+    },
+    {
+      "t": 31.7,
+      "text": "Door D14 detected at (-1.42m, 8.01m)"
+    },
+    {
+      "t": 31.7,
+      "text": "Navigating toward door D11 at (-1.19m, 6.19m)"
+    },
+    {
+      "t": 32.1,
+      "text": "Verifying doorway opening for door D11"
+    },
+    {
+      "t": 32.4,
+      "text": "Passing through door D11"
+    },
+    {
+      "t": 36.3,
+      "text": "Door D11 passed through and marked visited"
+    },
+    {
+      "t": 39.1,
+      "text": "Space classified as: CORRIDOR (width 90cm, length 683cm)"
+    },
+    {
+      "t": 39.1,
+      "text": "Door D15 detected at (-1.97m, 7.01m)"
+    },
+    {
+      "t": 39.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 39.5,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 39.9,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 42.5,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 359cm)"
+    },
+    {
+      "t": 42.5,
+      "text": "Door D16 detected at (-0.12m, 8.38m)"
+    },
+    {
+      "t": 42.5,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 42.5,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 42.8,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 45.7,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 378cm)"
+    },
+    {
+      "t": 45.7,
+      "text": "Door D17 detected at (-0.10m, 7.62m)"
+    },
+    {
+      "t": 45.7,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 45.7,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 46.0,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 48.7,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 381cm)"
+    },
+    {
+      "t": 48.7,
+      "text": "Door D18 detected at (0.53m, 8.00m)"
+    },
+    {
+      "t": 48.7,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 48.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 49.2,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 51.8,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 354cm)"
+    },
+    {
+      "t": 51.8,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 51.8,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 52.1,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 54.8,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 380cm)"
+    },
+    {
+      "t": 54.8,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 54.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 55.2,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 57.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 356cm)"
+    },
+    {
+      "t": 57.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 57.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 58.3,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 60.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 362cm)"
+    },
+    {
+      "t": 60.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 60.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 61.2,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 63.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 370cm)"
+    },
+    {
+      "t": 63.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 63.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 64.3,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 67.0,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 368cm)"
+    },
+    {
+      "t": 67.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 67.0,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 67.3,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 69.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 383cm)"
+    },
+    {
+      "t": 69.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 69.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 70.3,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 73.0,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 380cm)"
+    },
+    {
+      "t": 73.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 73.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 73.4,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 76.1,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 355cm)"
+    },
+    {
+      "t": 76.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 76.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 76.4,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 79.1,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 355cm)"
+    },
+    {
+      "t": 79.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 79.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 79.5,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 82.2,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 371cm)"
+    },
+    {
+      "t": 82.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 82.2,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 82.6,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 85.2,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 383cm)"
+    },
+    {
+      "t": 85.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 85.2,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 85.5,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 88.1,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 357cm)"
+    },
+    {
+      "t": 88.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 88.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 88.5,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 91.2,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 370cm)"
+    },
+    {
+      "t": 91.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 91.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 91.7,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 94.3,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 382cm)"
+    },
+    {
+      "t": 94.3,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 94.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 94.6,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 97.3,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 355cm)"
+    },
+    {
+      "t": 97.3,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 97.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 97.6,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 100.2,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 381cm)"
+    },
+    {
+      "t": 100.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 100.2,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 100.5,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 103.2,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 384cm)"
+    },
+    {
+      "t": 103.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 103.2,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 103.5,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 106.3,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 366cm)"
+    },
+    {
+      "t": 106.3,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 106.4,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 106.7,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 109.3,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 384cm)"
+    },
+    {
+      "t": 109.3,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 109.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 109.6,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 112.2,
+      "text": "Space classified as: CORRIDOR (width 56cm, length 383cm)"
+    },
+    {
+      "t": 112.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 112.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 112.6,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 115.4,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 377cm)"
+    },
+    {
+      "t": 115.4,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 115.4,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 115.7,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 118.5,
+      "text": "Space classified as: CORRIDOR (width 56cm, length 384cm)"
+    },
+    {
+      "t": 118.5,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 118.5,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 118.9,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 121.7,
+      "text": "Space classified as: CORRIDOR (width 56cm, length 378cm)"
+    },
+    {
+      "t": 121.7,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 121.7,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 122.0,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 124.8,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 382cm)"
+    },
+    {
+      "t": 124.8,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 124.8,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 125.1,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 127.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 372cm)"
+    },
+    {
+      "t": 127.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 127.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 128.2,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 130.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 381cm)"
+    },
+    {
+      "t": 130.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 130.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 131.2,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 133.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 378cm)"
+    },
+    {
+      "t": 133.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 133.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 134.2,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 137.0,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 368cm)"
+    },
+    {
+      "t": 137.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 137.0,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 137.3,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 140.0,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 380cm)"
+    },
+    {
+      "t": 140.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 140.0,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 140.4,
+      "text": "Door D13 blocked ahead (21 cm)"
+    },
+    {
+      "t": 143.0,
+      "text": "Space classified as: CORRIDOR (width 56cm, length 380cm)"
+    },
+    {
+      "t": 143.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 143.0,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 143.4,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 146.1,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 379cm)"
+    },
+    {
+      "t": 146.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 146.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 146.4,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 149.0,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 379cm)"
+    },
+    {
+      "t": 149.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 149.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 149.4,
+      "text": "Door D13 blocked ahead (18 cm)"
+    },
+    {
+      "t": 152.1,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 359cm)"
+    },
+    {
+      "t": 152.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 152.1,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 152.5,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 155.1,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 364cm)"
+    },
+    {
+      "t": 155.1,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 155.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 155.6,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 158.3,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 373cm)"
+    },
+    {
+      "t": 158.3,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 158.3,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 158.6,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 161.4,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 378cm)"
+    },
+    {
+      "t": 161.4,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 161.4,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 161.8,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 164.5,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 379cm)"
+    },
+    {
+      "t": 164.5,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 164.5,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 164.8,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 167.6,
+      "text": "Space classified as: CORRIDOR (width 54cm, length 358cm)"
+    },
+    {
+      "t": 167.6,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 167.6,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 168.0,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 170.8,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 382cm)"
+    },
+    {
+      "t": 170.8,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 170.8,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 171.2,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 173.9,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 382cm)"
+    },
+    {
+      "t": 173.9,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 173.9,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 174.3,
+      "text": "Door D13 blocked ahead (19 cm)"
+    },
+    {
+      "t": 177.0,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 378cm)"
+    },
+    {
+      "t": 177.0,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 177.0,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 177.4,
+      "text": "Door D13 blocked ahead (20 cm)"
+    },
+    {
+      "t": 180.2,
+      "text": "Space classified as: CORRIDOR (width 55cm, length 373cm)"
+    },
+    {
+      "t": 180.2,
+      "text": "Navigating toward door D13 at (-2.17m, 6.16m)"
+    },
+    {
+      "t": 180.2,
+      "text": "Verifying doorway opening for door D13"
+    },
+    {
+      "t": 182.1,
+      "text": "Passing through door D13"
+    },
+    {
+      "t": 0.2,
+      "text": "Return time budgeting: leaving for home early (53.6s return buffer)"
+    },
+    {
+      "t": 0.2,
+      "text": "Return time budgeting: leaving for home early (53.6s return buffer)"
+    },
+    {
+      "t": 0.2,
+      "text": "Time limit (3 min) reached with 0 of 5 people found. Returning to the entry point"
+    },
+    {
+      "t": 0.5,
+      "text": "Returning home along Dijkstra shortest route"
+    },
+    {
+      "t": 0.5,
+      "text": "Returning home along Dijkstra shortest route"
+    },
+    {
+      "t": 3.5,
+      "text": "Stall detected: initiating recovery attempt 1 of 3"
+    },
+    {
+      "t": 4.5,
+      "text": "Stall recovery tier 1 complete (backoff & wiggle)"
+    },
+    {
+      "t": 8.1,
+      "text": "Stall detected: initiating recovery attempt 2 of 3"
+    },
+    {
+      "t": 9.0,
+      "text": "Stall detected: initiating recovery attempt 3 of 3"
+    },
+    {
+      "t": 9.0,
+      "text": "Stall recovery failed after 3 attempts: rover STUCK"
+    },
+    {
+      "t": 12.0,
+      "text": "Stall recovery tier 2 complete (lateral sidestep)"
+    },
+    {
+      "t": 14.1,
+      "text": "Returning home along Dijkstra shortest route"
+    },
+    {
+      "t": 26.1,
+      "text": "Return route leg N3->N2 blocked! Re-planning via Dijkstra..."
+    },
+    {
+      "t": 26.1,
+      "text": "Return route leg N4->N3 blocked! Re-planning via Dijkstra..."
+    },
+    {
+      "t": 28.8,
+      "text": "Returned to start: distance from exact start point is 464.4 cm"
+    },
+    {
+      "t": 28.8,
+      "text": "Returned to start: distance from exact start point is 464.4 cm"
+    }
+  ],
+  "note": "Positions are estimates from motor run time (no encoders / IMU) and drift as the rover moves."
+}

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phoenix Ground Control</title>
+<style>
+:root{
+  --ground:#14232e; --panel:#1b2f3c; --edge:#2b4555; --text:#e8eef0; --muted:#8ca3ad;
+  --paper:#d9e3e1; --ink:#17303a; --rover:#0e8f8a; --survivor:#f2b63d; --alarm:#e5432d; --ok:#4fc08d;
+  --ui:"Bahnschrift","DIN Alternate","Segoe UI",system-ui,sans-serif;
+  --num:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--ground);color:var(--text);font-family:var(--ui)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--survivor);outline-offset:2px}
+header{display:flex;align-items:center;gap:16px;padding:10px 16px;border-bottom:1px solid var(--edge)}
+header h1{font-size:18px;font-weight:600;margin:0;letter-spacing:.02em}
+#link{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-left:auto}
+#link i{width:10px;height:10px;border-radius:50%;background:var(--alarm)}
+#link.on i{background:var(--ok)}
+#state{font-family:var(--num);font-size:14px;padding:4px 10px;border:1px solid var(--edge);border-radius:4px}
+main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) 300px;gap:12px;padding:12px;height:calc(100% - 52px)}
+section{background:var(--panel);border:1px solid var(--edge);border-radius:6px;padding:10px;display:flex;flex-direction:column;min-height:0}
+h2{font-size:14px;font-weight:600;color:var(--muted);margin:0 0 8px}
+#camwrap{background:#000;border-radius:3px;aspect-ratio:4/3;overflow:hidden;position:relative}
+#camwrap img{width:100%;height:100%;object-fit:contain;display:block}
+#camstate{position:absolute;left:14px;bottom:14px;padding:4px 7px;border-radius:3px;background:#7a1f12;color:#fff;font-size:12px}
+#camstate.live{background:#176f4b}
+#mapwrap,#graphwrap{flex:1;min-height:0;background:var(--paper);border-radius:3px;position:relative}
+canvas{width:100%;height:100%;display:block}
+.col{display:flex;flex-direction:column;gap:12px;min-height:0}
+.tele{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px;margin:0}
+.tele dt{color:var(--muted)} .tele dd{margin:0;font-family:var(--num);text-align:right}
+#log{flex:1;overflow:auto;font-family:var(--num);font-size:12px;line-height:1.5;color:var(--muted);min-height:80px}
+#log b{color:var(--text);font-weight:400}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--edge);border-radius:4px;overflow:hidden}
+.seg button{background:none;border:0;padding:9px;font-weight:600}
+.seg button.on{background:var(--rover);color:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.btn{background:#24404f;border:1px solid var(--edge);border-radius:4px;padding:10px;font-weight:600}
+.btn:hover:not(:disabled){background:#2d4e60}
+.btn:disabled,.pad button:disabled{opacity:.35;cursor:not-allowed}
+#estop{margin-top:10px;width:100%;padding:18px;font-size:20px;font-weight:700;background:var(--alarm);border:3px solid #ffb4a6;border-radius:6px;color:#fff}
+#estop.latched{background:#7a1f12;border-color:var(--alarm)}
+.pad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(2,56px);gap:6px;justify-content:center;margin-top:6px}
+.pad button{background:#24404f;border:1px solid var(--edge);border-radius:6px;font-size:22px;touch-action:none;user-select:none}
+.pad button.down{background:var(--rover)}
+.pad .f{grid-column:2}.pad .l{grid-row:2;grid-column:1}.pad .b{grid-row:2;grid-column:2}.pad .r{grid-row:2;grid-column:3}
+.hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+#bar{height:6px;background:#0f1c25;border-radius:3px;margin-top:6px;overflow:hidden}
+#bar i{display:block;height:100%;background:var(--ok);width:50%}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-top:8px;font-size:13px;color:var(--muted)}
+.legend .k{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:6px}
+.legend .k.out{border-color:#1f6fd0}.legend .k.ret{border-color:#e5432d;border-top-style:dashed}
+.legend .k.nd{width:11px;height:11px;border:2px solid #d9e3e1;border-radius:50%;background:#17303a}
+.legend .k.sq{width:11px;height:11px;border:2px solid #17303a;background:#d9e3e1}
+.legend .k.dr{width:11px;height:11px;border:2px solid #17303a;background:#00c8b3}
+.legend .k.rp{border-color:#e5432d;border-top-style:dashed}
+.legend .k.sv{width:11px;height:11px;border:2px solid #17303a;border-radius:50%;background:var(--survivor)}
+.legend .btn{margin-left:auto;padding:6px 10px;font-size:13px}
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--edge);border-radius:8px;padding:20px;width:min(360px,92vw)}
+dialog::backdrop{background:rgba(5,12,17,.72)}
+dialog h3{margin:0 0 12px;font-size:18px}
+dialog label{display:block;font-size:14px;color:var(--text);margin-bottom:8px}
+dialog input[type=number]{width:100%;padding:12px;font:inherit;font-family:var(--num);font-size:24px;text-align:center;background:#0f1c25;color:var(--text);border:1px solid var(--edge);border-radius:6px}
+dialog input[type=number]:focus-visible{outline:2px solid var(--survivor);outline-offset:1px}
+dialog .hint{text-align:left;margin:10px 0 0;line-height:1.45}
+dialog .row{margin-top:16px}
+.btn.go{background:var(--rover);border-color:var(--rover);color:#fff}
+.btn.go:hover{background:#12a8a2}
+@media (max-width:1000px){
+  html,body{height:auto} main{grid-template-columns:1fr;height:auto}
+  #mapwrap,#graphwrap{min-height:300px}
+}
+@media (prefers-reduced-motion:no-preference){ #estop{transition:background .15s} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Phoenix Ground Control</h1>
+  <span id="state">IDLE</span>
+  <span id="stall-badge" style="display:none;font-family:var(--num);font-size:12px;padding:3px 8px;border-radius:4px;background:var(--alarm);color:#fff;font-weight:700">STALLED</span>
+  <span id="link"><i></i><span>Offline</span></span>
+</header>
+<main>
+  <div class="col">
+    <section><h2>Rover camera</h2><div id="camwrap"><img id="cam" alt="Live rover camera"><span id="camstate">Connecting to camera…</span></div></section>
+    <section style="flex:1"><h2>Telemetry</h2>
+      <dl class="tele">
+        <dt>Battery voltage</dt><dd id="t-bat">Not measured</dd>
+      </dl>
+      <div id="bar"><i></i></div>
+      <dl class="tele" style="margin-top:10px">
+        <dt>Motor command</dt><dd id="t-spd">-</dd>
+        <dt>Position</dt><dd id="t-pos">-</dd>
+        <dt>Heading</dt><dd id="t-hdg">-</dd>
+        <dt>Gyro heading</dt><dd id="t-yaw">-</dd>
+        <dt>Vibration</dt><dd id="t-vib">-</dd>
+        <dt>Environment</dt><dd id="t-space">Room</dd>
+        <dt>Doors</dt><dd id="t-doors">0</dd>
+        <dt>Front range</dt><dd id="t-front">-</dd>
+        <dt>Rear range</dt><dd id="t-back">-</dd>
+        <dt>People found</dt><dd id="t-sv">Not connected</dd>
+        <dt>Furniture in view</dt><dd id="t-obj">-</dd>
+        <dt>Mission time</dt><dd id="t-time">-</dd>
+        <dt>Breadcrumbs</dt><dd id="t-cr">0</dd>
+      </dl>
+    </section>
+  </div>
+
+  <div class="col">
+    <section style="flex:1.25"><h2>Window 1: Live map</h2>
+      <div id="mapwrap"><canvas id="map" aria-label="Live map of the rover path"></canvas></div>
+      <div class="legend">
+        <span><i class="k out"></i>Going out</span><span><i class="k ret"></i>Returning</span><span><i class="k dr"></i>Door</span><span><i class="k sv"></i>Person found</span>
+        <button class="btn" id="savemap">Save map image</button>
+      </div>
+      <div class="hint" style="margin-top:4px">Up on the map = the direction the rover faced at the start. Position is an estimate (no encoders).</div>
+    </section>
+    <section style="flex:1"><h2>Window 2: Route graph</h2>
+      <div id="graphwrap"><canvas id="graph" aria-label="Route graph: corners and the runs between them"></canvas></div>
+      <div class="legend">
+        <span><i class="k sq"></i>Entry</span><span><i class="k nd"></i>Corner</span><span><i class="k sv"></i>Person</span><span><i class="k rp"></i>Shortest way home</span>
+      </div>
+      <div class="hint" id="graphhint" style="margin-top:4px">Numbers on the lines are the run lengths in cm.</div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section>
+      <h2>Mission</h2>
+      <div class="seg" role="group" aria-label="Control mode">
+        <button id="m-auto">Auto</button><button id="m-man">Manual</button>
+      </div>
+      <div class="row">
+        <button class="btn" id="start">Start mission</button>
+        <button class="btn" id="ret">Return to entry</button>
+      </div>
+      <button class="btn" id="stopmission" style="margin-top:8px">Stop motion</button>
+      <button class="btn" id="report" style="margin-top:8px;width:100%" disabled>Open mission report</button>
+      <button id="estop">EMERGENCY STOP</button>
+      <div class="hint">Software stop latch; Space bar also stops the rover</div>
+    </section>
+    <section>
+      <h2>Manual drive</h2>
+      <div class="pad">
+        <button class="f" data-k="f" aria-label="Forward">&#9650;</button>
+        <button class="l" data-k="l" aria-label="Turn left">&#9664;</button>
+        <button class="b" data-k="b" aria-label="Reverse">&#9660;</button>
+        <button class="r" data-k="r" aria-label="Turn right">&#9654;</button>
+      </div>
+      <label class="hint" for="power">Motor power: <span id="power-label">40%</span></label>
+      <input id="power" type="range" min="10" max="100" step="5" value="40">
+      <div class="hint" id="padhint">Hold a button or W A S D / arrow keys</div>
+    </section>
+    <section style="flex:1"><h2>Event log</h2><div id="log"></div></section>
+  </div>
+</main>
+
+<dialog id="missionDlg" aria-labelledby="md-title">
+  <form id="missionForm">
+    <h3 id="md-title">Start mission</h3>
+    <label for="people">How many people should the rover find?</label>
+    <input id="people" type="number" min="0" max="20" step="1" value="1" inputmode="numeric" required>
+    <label for="minutes" style="margin-top:14px">Search time limit (minutes)</label>
+    <input id="minutes" type="number" min="0" max="120" step="1" value="10" inputmode="numeric" required>
+    <p class="hint">The rover explores and returns to its entry point by itself as soon as it has found this many different people, or when the time limit runs out, or if the battery gets low. The trip back takes extra time. Enter 0 for no people target or no time limit.</p>
+    <div class="row">
+      <button type="button" class="btn" id="md-cancel">Cancel</button>
+      <button type="submit" class="btn go" id="md-go">Start</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+const S = {pose:{x:0,y:0,th:0}, tele:{mode:"MANUAL",state:"IDLE",estop:false,stalled:false,space:"room"}, online:false, out:[], ret:[], marks:[], doors:[], graph:{nodes:[],edges:[],return_path:[]}};
+let keys = new Set(), lastEvent = 0, polling = false, driveWasActive = false;
+async function send(action, extra={}) {
+  try {
+    const r = await fetch("/api/control", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({action,...extra})});
+    if (!r.ok) addLog("Command rejected: " + (await r.text()));
+  } catch (_) { setLink(false); }
+}
+function setLink(on){ S.online=on; $("link").className=on?"on":""; $("link").lastChild.textContent=on?"Linked to Pi":"Offline, reconnecting"; renderUI(); }
+function addLog(t){
+  const d=document.createElement("div"), n=new Date().toLocaleTimeString([], {hour12:false});
+  d.textContent=`${n} ${t}`; const L=$("log"); L.prepend(d); while(L.children.length>60) L.lastChild.remove();
+}
+function renderUI(){
+  const t=S.tele, manual=t.mode==="MANUAL", live=S.online;
+  $("state").textContent=t.state+(t.approaching?" - walking up to a face":"");
+  $("m-auto").classList.toggle("on",!manual); $("m-man").classList.toggle("on",manual);
+  $("m-auto").disabled=$("m-man").disabled=!live||t.estop;
+  $("start").disabled=!live||t.estop||t.state==="EXPLORING"||t.state==="RETURNING";
+  $("ret").disabled=!live||t.estop||t.state==="RETURNING";
+  $("stopmission").disabled=!live;
+  $("power").disabled=!live||t.estop||t.running;
+  $("estop").textContent=t.estop?"E-STOP LATCHED. Tap to release":"EMERGENCY STOP";
+  $("estop").classList.toggle("latched",t.estop);
+  const padOn=live&&manual&&!t.estop&&!t.running;
+  document.querySelectorAll(".pad button").forEach(b=>b.disabled=!padOn);
+  $("padhint").textContent=padOn?"Hold a button or W A S D / arrow keys":"Switch to Manual mode and stop AUTO to drive";
+  const bar=$("bar").firstElementChild;
+  if(t.bat==null){ $("t-bat").textContent="Not measured"; bar.style.width="0%"; }
+  else{
+    $("t-bat").textContent=`${Number(t.bat).toFixed(1)} V (${t.batPct}%)`;
+    bar.style.width=t.batPct+"%";
+    bar.style.background=t.batState==="low"?"var(--alarm)":t.batState==="warn"?"var(--survivor)":"var(--ok)";
+  }
+  const mmss=sec=>String(Math.floor(sec/60)).padStart(2,"0")+":"+String(Math.floor(sec%60)).padStart(2,"0");
+  $("t-time").textContent=t.elapsed==null?"-":(t.limit>0?`${mmss(t.elapsed)} / ${mmss(t.limit*60)}`:`${mmss(t.elapsed)} (no limit)`);
+  $("report").disabled=!t.report;
+  $("t-spd").textContent=(t.speed??"-")+" %";
+  $("t-pos").textContent=`${S.pose.x.toFixed(2)}, ${S.pose.y.toFixed(2)} m (estimated)`;
+  $("t-hdg").textContent=`${((S.pose.th*180/Math.PI)%360+360)%360|0} deg (estimated)`;
+  $("t-yaw").textContent=t.imuOk&&t.imuYaw!=null?`${Number(t.imuYaw).toFixed(1)} deg`:"No MPU data";
+  $("t-vib").textContent=t.imuOk&&t.imuVib!=null?`${Number(t.imuVib).toFixed(1)} mg`:"No MPU data";
+  $("stall-badge").style.display=t.stalled?"inline-block":"none";
+  if($("t-space")) $("t-space").textContent=(t.space||"room").toUpperCase();
+  if($("t-doors")) $("t-doors").textContent=`${S.doors.length} (${S.doors.filter(d=>d.visited).length} visited)`;
+  const oc={};(t.objects||[]).forEach(o=>oc[o.label]=(oc[o.label]||0)+1);
+  $("t-obj").textContent=!t.objOn?"Detector off":Object.keys(oc).length?Object.entries(oc).map(([k,v])=>`${v} ${k}`).join(", "):"None";
+  $("t-front").textContent=t.front==null?"No reading":`${Number(t.front).toFixed(0)} cm`;
+  $("t-back").textContent=t.back==null?"No reading":`${Number(t.back).toFixed(0)} cm`;
+  $("t-sv").textContent=!t.cam?"Camera offline":(t.target>0?`${t.found} of ${t.target}`:`${t.found} (no target)`); $("t-cr").textContent=t.crumbs??"-";
+}
+$("m-auto").onclick=()=>send("mode",{value:"AUTO"});
+$("m-man").onclick=()=>send("mode",{value:"MANUAL"});
+const dlg=$("missionDlg"), peopleInput=$("people");
+$("start").onclick=()=>{ keys.clear(); dlg.showModal(); peopleInput.select(); };
+$("md-cancel").onclick=()=>dlg.close();
+$("missionForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const n=Number(peopleInput.value), m=Number($("minutes").value);
+  if(!Number.isInteger(n)||n<0||n>20||!Number.isFinite(m)||m<0||m>120) return;
+  dlg.close();
+  send("start",{people:n,minutes:m});
+});
+$("report").onclick=()=>window.open("/report","_blank");
+$("ret").onclick=()=>send("return"); $("stopmission").onclick=()=>send("stop");
+$("power").oninput=()=>$("power-label").textContent=$("power").value+"%";
+$("power").onchange=()=>send("speed",{value:Number($("power").value)});
+$("estop").onclick=()=>send(S.tele.estop?"reset":"estop");
+const KEYMAP={w:"f",arrowup:"f",s:"b",arrowdown:"b",a:"l",arrowleft:"l",d:"r",arrowright:"r"};
+addEventListener("keydown",e=>{if(e.code==="Space"){e.preventDefault();if(!S.tele.estop)send("estop");return;}if(e.target.closest&&e.target.closest("dialog"))return;const k=KEYMAP[e.key.toLowerCase()];if(k){e.preventDefault();keys.add(k);}});
+addEventListener("keyup",e=>{if(e.code==="Space"){e.preventDefault();return;}const k=KEYMAP[e.key.toLowerCase()];if(k)keys.delete(k);});
+addEventListener("blur",()=>keys.clear());
+document.querySelectorAll(".pad button").forEach(b=>{const k=b.dataset.k;b.addEventListener("pointerdown",e=>{e.preventDefault();keys.add(k);b.classList.add("down");});["pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,()=>{keys.delete(k);b.classList.remove("down");}));});
+setInterval(()=>{if(S.tele.mode!=="MANUAL"||S.tele.estop||S.tele.running){if(driveWasActive)send("drive",{lin:0,ang:0});driveWasActive=false;return;}const lin=(keys.has("f")?1:0)-(keys.has("b")?1:0);const ang=(keys.has("l")?1:0)-(keys.has("r")?1:0);if(lin||ang||driveWasActive)send("drive",{lin,ang});driveWasActive=!!(lin||ang);},100);
+async function refresh(){
+  if(polling)return;polling=true;
+  try{const r=await fetch(`/api/data?since=${lastEvent}`,{cache:"no-store"});if(!r.ok)throw Error();const d=await r.json();setLink(true);if(d.event_id!=null&&d.event_id<lastEvent)lastEvent=0;S.pose={x:d.x,y:d.y,th:d.heading*Math.PI/180};S.tele={mode:d.mode,state:d.state,estop:d.estop,running:d.running,speed:d.speed,crumbs:d.crumbs,front:d.front_cm,back:d.back_cm,found:d.survivors??0,target:d.survivor_target??0,cam:!!d.camera_ok,bat:d.battery,batPct:d.battery_pct,batState:d.battery_state,elapsed:d.elapsed_s,limit:d.time_limit_min||0,approaching:!!d.approaching,report:!!d.report_ready,imuOk:!!d.imu_ok,imuYaw:d.imu_yaw,imuVib:d.imu_vib,stalled:!!d.stalled,space:d.space||"room",objOn:!!d.objects_on,objects:d.objects||[]};if(document.activeElement!==$("power")){ $("power").value=d.speed; $("power-label").textContent=d.speed+"%"; }S.out=d.path_out||[];S.ret=d.path_return||[];S.marks=d.found_at||[];S.doors=d.doors||[];S.graph=d.route_graph||{nodes:[],edges:[],return_path:[]};(d.events||[]).forEach(e=>{addLog(e.text);lastEvent=Math.max(lastEvent,e.id);});renderUI();drawMap();drawGraph();}
+  catch(_){setLink(false);}finally{polling=false;}
+}
+setInterval(refresh,300);refresh();
+$("cam").onload=()=>{$("camstate").textContent="Live camera";$("camstate").classList.add("live");};
+$("cam").onerror=()=>{$("camstate").textContent="Camera unavailable - retrying";$("camstate").classList.remove("live");setTimeout(()=>{$("cam").src="/video?retry="+Date.now();},1200);};$("cam").src="/video";
+const cv=$("map"),cx=cv.getContext("2d");
+function drawMap(){
+  const w=cv.clientWidth,h=cv.clientHeight,dpr=devicePixelRatio||1;
+  if(!w||!h)return;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
+  cx.setTransform(dpr,0,0,dpr,0,0);
+  cx.fillStyle="#d9e3e1";cx.fillRect(0,0,w,h);                 // drawn (not CSS) so "Save map image" keeps it
+  const p=S.pose, st=S.tele.state;
+  const out=S.out.map(q=>[q[0],q[1]]), ret=S.ret.map(q=>[q[0],q[1]]);
+  if(st==="EXPLORING") out.push([p.x,p.y]); else if(st==="RETURNING"&&ret.length) ret.push([p.x,p.y]);
+  const mk=m=>[m.px??m.x,m.py??m.y];
+  const all=[[0,0],[p.x,p.y],...out,...ret,...S.marks.map(mk)];
+  const xs=all.map(q=>q[0]), ys=all.map(q=>q[1]);
+  const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+  const pad=34, sc=Math.min((w-2*pad)/Math.max(maxx-minx,2),(h-2*pad)/Math.max(maxy-miny,2));  // px per metre, at least a 2 m view
+  const mx=(minx+maxx)/2, my=(miny+maxy)/2;
+  const X=x=>w/2+(x-mx)*sc, Y=y=>h/2-(y-my)*sc;
+  // grid in metres
+  const step=[.25,.5,1,2,5,10,20].find(v=>v*sc>=48)||20;
+  cx.strokeStyle="rgba(23,48,58,.15)";cx.lineWidth=1;cx.beginPath();
+  for(let gx=Math.floor((mx-w/2/sc)/step)*step;gx<=mx+w/2/sc;gx+=step){cx.moveTo(X(gx),0);cx.lineTo(X(gx),h);}
+  for(let gy=Math.floor((my-h/2/sc)/step)*step;gy<=my+h/2/sc;gy+=step){cx.moveTo(0,Y(gy));cx.lineTo(w,Y(gy));}
+  cx.stroke();
+  cx.fillStyle="rgba(23,48,58,.75)";cx.font="12px sans-serif";cx.fillText(`grid ${step} m`,10,h-10);
+  const line=(pts,color,dash)=>{
+    if(pts.length<2)return;
+    cx.setLineDash(dash);cx.strokeStyle=color;cx.lineWidth=3;cx.lineJoin="round";cx.beginPath();
+    pts.forEach((q,i)=>i?cx.lineTo(X(q[0]),Y(q[1])):cx.moveTo(X(q[0]),Y(q[1])));cx.stroke();cx.setLineDash([]);
+    cx.fillStyle=color;pts.forEach(q=>{cx.beginPath();cx.arc(X(q[0]),Y(q[1]),3.5,0,7);cx.fill();});
+  };
+  line(out,"#1f6fd0",[]); line(ret,"#e5432d",[9,6]);
+  // entry / exit
+  cx.strokeStyle="#17303a";cx.lineWidth=2;cx.fillStyle="#d9e3e1";
+  cx.fillRect(X(0)-7,Y(0)-7,14,14);cx.strokeRect(X(0)-7,Y(0)-7,14,14);
+  cx.fillStyle="#17303a";cx.font="600 12px sans-serif";cx.fillText("Entry / Exit",X(0)+12,Y(0)+4);
+  // detected doors
+  (S.doors||[]).forEach(d=>{
+    const dx=d.x>50?d.x/100.0:d.x, dy=d.y>50?d.y/100.0:d.y;
+    const qx=X(dx), qy=Y(dy);
+    cx.fillStyle=d.visited?"#4fc08d":"#00c8b3";cx.strokeStyle="#17303a";cx.lineWidth=2;
+    cx.fillRect(qx-6,qy-6,12,12);cx.strokeRect(qx-6,qy-6,12,12);
+    cx.fillStyle="#17303a";cx.font="600 11px sans-serif";
+    cx.fillText((d.id||"D")+(d.visited?" ✓":""),qx+8,qy+4);
+  });
+  // people found (where the rover was when each person was counted)
+  S.marks.forEach(m=>{
+    const [qx,qy]=mk(m);
+    cx.beginPath();cx.arc(X(qx),Y(qy),8,0,7);cx.fillStyle="#f2b63d";cx.fill();cx.lineWidth=2;cx.strokeStyle="#17303a";cx.stroke();
+    cx.fillStyle="#17303a";cx.font="600 12px sans-serif";cx.fillText(m.name,X(qx)+12,Y(qy)-8);
+  });
+  // rover, pointing where it is heading
+  cx.save();cx.translate(X(p.x),Y(p.y));cx.rotate(-p.th);
+  cx.fillStyle="#0e8f8a";cx.strokeStyle="#17303a";cx.lineWidth=2;cx.beginPath();
+  cx.moveTo(15,0);cx.lineTo(-10,9);cx.lineTo(-10,-9);cx.closePath();cx.fill();cx.stroke();cx.restore();
+}
+new ResizeObserver(drawMap).observe($("mapwrap"));
+$("savemap").onclick=()=>{drawMap();cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="rover-map-"+new Date().toISOString().replace(/[:.]/g,"-")+".png";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);});};
+
+const gv=$("graph"),gx=gv.getContext("2d");
+function drawGraph(){
+  const w=gv.clientWidth,h=gv.clientHeight,dpr=devicePixelRatio||1;
+  if(!w||!h)return;
+  if(gv.width!==Math.round(w*dpr)||gv.height!==Math.round(h*dpr)){gv.width=Math.round(w*dpr);gv.height=Math.round(h*dpr);}
+  gx.setTransform(dpr,0,0,dpr,0,0);
+  gx.fillStyle="#d9e3e1";gx.fillRect(0,0,w,h);
+  const g=S.graph||{}, nodes=g.nodes||[], edges=g.edges||[], rp=g.return_path||[];
+  const hint=$("graphhint");
+  if(nodes.length<2){
+    gx.fillStyle="rgba(23,48,58,.75)";gx.font="14px sans-serif";gx.textAlign="center";
+    gx.fillText("The route graph fills in once the rover starts exploring.",w/2,h/2);gx.textAlign="start";
+    hint.textContent="Numbers on the lines are the run lengths in cm.";return;
+  }
+  const byId={};nodes.forEach(n=>byId[n.id]=n);
+  const xs=nodes.map(n=>n.x),ys=nodes.map(n=>n.y);
+  const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+  const pad=40,sc=Math.min((w-2*pad)/Math.max(maxx-minx,1),(h-2*pad)/Math.max(maxy-miny,1));
+  const mx=(minx+maxx)/2,my=(miny+maxy)/2,X=x=>w/2+(x-mx)*sc,Y=y=>h/2-(y-my)*sc;
+  const onPath=new Set();
+  for(let i=0;i+1<rp.length;i++){onPath.add(rp[i]+"|"+rp[i+1]);onPath.add(rp[i+1]+"|"+rp[i]);}
+  let pathCm=0;
+  edges.forEach(e=>{
+    const a=byId[e.a],b=byId[e.b];if(!a||!b)return;
+    const best=onPath.has(e.a+"|"+e.b);if(best)pathCm+=e.cm;
+    gx.beginPath();gx.moveTo(X(a.x),Y(a.y));gx.lineTo(X(b.x),Y(b.y));
+    gx.setLineDash(best?[9,6]:e.link?[3,4]:[]);
+    gx.strokeStyle=best?"#e5432d":e.link?"#b8860b":"#17303a";gx.lineWidth=best?4:2;gx.stroke();gx.setLineDash([]);
+    const len=Math.hypot(X(a.x)-X(b.x),Y(a.y)-Y(b.y));
+    if(len>46&&!e.link){
+      const tx=(X(a.x)+X(b.x))/2,ty=(Y(a.y)+Y(b.y))/2,txt=String(e.cm);
+      gx.font="600 11px sans-serif";const tw=gx.measureText(txt).width;
+      gx.fillStyle="#d9e3e1";gx.fillRect(tx-tw/2-3,ty-8,tw+6,16);
+      gx.fillStyle="#17303a";gx.textAlign="center";gx.fillText(txt,tx,ty+4);gx.textAlign="start";
+    }
+  });
+  nodes.forEach(n=>{
+    const px=X(n.x),py=Y(n.y);
+    gx.lineWidth=2;gx.strokeStyle="#17303a";
+    if(n.kind==="start"){gx.fillStyle="#d9e3e1";gx.fillRect(px-8,py-8,16,16);gx.strokeRect(px-8,py-8,16,16);gx.fillStyle="#17303a";gx.font="600 12px sans-serif";gx.fillText("Entry",px+12,py+4);}
+    else if(n.kind==="person"){gx.beginPath();gx.arc(px,py,8,0,7);gx.fillStyle="#f2b63d";gx.fill();gx.stroke();gx.fillStyle="#17303a";gx.font="600 12px sans-serif";gx.fillText(n.label||n.id,px+12,py-8);}
+    else if(n.kind==="door"){gx.beginPath();gx.moveTo(px,py-9);gx.lineTo(px+9,py);gx.lineTo(px,py+9);gx.lineTo(px-9,py);gx.closePath();gx.fillStyle="#d9e3e1";gx.fill();gx.stroke();gx.fillStyle="#17303a";gx.font="600 12px sans-serif";gx.fillText(n.label||n.id,px+12,py-8);}
+    else{gx.beginPath();gx.arc(px,py,6,0,7);gx.fillStyle="#17303a";gx.fill();}
+  });
+  const runs=edges.filter(e=>!e.link).length;
+  hint.textContent=rp.length>1?`Shortest way home: ${pathCm} cm. Numbers on the lines are run lengths in cm.`:`${nodes.filter(n=>n.kind!=="person").length} places, ${runs} runs. Shortest way home: not computed yet.`;
+}
+new ResizeObserver(drawGraph).observe($("graphwrap"));
+drawMap();drawGraph();renderUI();
+</script>
+</body>
+</html>
